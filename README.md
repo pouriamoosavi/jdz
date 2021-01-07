@@ -5,18 +5,25 @@ A simple, light, low dependant library to create a dropzone. By default it creat
 
 ## Installation
 
+### Download
+
 - Clone project from this repo.
 - Add it somewhere your front-end code can access.
 - Add link to css file: `<link rel="stylesheet" href="/path_to_jdz/styles.css"/>`
 - Add script to js file: `<script src="path_to_jdz/index.js"></script>`
+
+### CDN
+
+- Add link to css file: `<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/styles.css"/>`
+- Add script to js file: `<script src="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/index.js"></script>`
 
 ## Usage
 
 `JDZ` is a global object (in `window`) so you can use it like `JDZ.function_name` any where in your script right after you include it in your page.<br> For now there is only one way to use this library, calling `init` function.<br>
 This function accepts two arguments, first is the id of the element you want to dropzone place in it. simplest configuration would be:
 
-```
-JDZ.init('jdzContainer'); // jdzContainer is the id of the element which would be JDZ parent
+```js
+JDZ.init("jdzContainer"); // jdzContainer is the id of the element which would be JDZ parent
 ```
 
 The second argument is an object with some extra options:
@@ -36,7 +43,7 @@ Each object in `files` array should have these keys to work properly:
 
 Beside those `options` There are two functions which you can access from `JDZ`:
 | Name | Description | Inputs | Output |
-|---|---|---|---|---|
+|---|---|---|---|
 |`browse`|Open file browse dialog to choose file/files from system.|`null`|`null`|
 |`delete`|Delete one file from both dropzone and file `input`s|`id`: number|`null`|
 
@@ -44,44 +51,82 @@ Beside those `options` There are two functions which you can access from `JDZ`:
 
 `init` with options:
 
-```
-JDZ.init('jdzContainer', {
+```js
+JDZ.init("jdzContainer", {
   dropFileHere: "<labe>Awesome Drop Zone!</label>",
-  files: [{
-    "name": "radome photo.png",
-    "path": "https://picsum.photos/200/300",
-    "mime": "image/png",
-  }],
-  paramName: "photos"
+  files: [
+    {
+      name: "radome photo.png",
+      path: "https://picsum.photos/200/300",
+      mime: "image/png",
+    },
+  ],
+  paramName: "photos",
 });
 ```
 
 Calling `browse` function:
 
-```
+```html
 <button type="button" onclick="JDZ.browse()"><i class="fa fa-upload"></i> upload</button>
 ```
 
 Full example:
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-  <link rel="stylesheet" href="https://raw.githubusercontent.com/pouriamoosavi/jdz/main/styles.css"/>
-  <script src="https://raw.githubusercontent.com/pouriamoosavi/jdz/main/index.js"></script>
-</head>
-<body>
-  <div>
-    <label>Drop files here to upload or click
-      <button type="button" class="btn btn-sm" onclick="JDZ.browse()"><i class="fa fa-upload"></i> upload</button>
-    </label>
-  </div>
-  <div id="jdzContainer">
-  </div>
-  <script>
-    JDZ.init('jdzContainer', {});
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Awesome JDZ</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/styles.css"
+    />
+    <script src="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/index.js"></script>
+  </head>
+  <body>
+    <div style="margin-bottom: 10px;">
+      <label
+        >Drop files here to upload or click
+        <button type="button" class="jdz-btn jdz-btn-sm jdz-btn-dark" onclick="JDZ.browse()">
+          <i class="fa fa-upload"></i> upload
+        </button>
+      </label>
+    </div>
+    <div id="jdzContainer"></div>
+    <script>
+      JDZ.init("jdzContainer", {
+        files: [
+          {
+            name: "radome photo.png",
+            path: "https://picsum.photos/200/300",
+            mime: "image/png",
+          },
+        ],
+      });
+    </script>
+  </body>
+</html>
 ```
+
+## Dependencies
+
+- <a href="https://fontawesome.com/">Font Awesome</a> (fa) >= 5
+
+## Contribute
+
+Feel free to report bugs and issues.
+Also new ideas will be appreciated.
+For now I think the most important things to do are:
+
+- Add more options specially for styles, labels, sizing, showing preview buttons and button labels.
+- Add more events and hooks. (e.g: `onDrop`, `beforeDelete`, ...)
+
+So if you find them cool, you can help me!
