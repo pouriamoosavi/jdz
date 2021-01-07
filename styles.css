@@ -1,0 +1,127 @@
+.jdz-drop-container {
+  border: 2px solid rgb(134, 123, 123);
+  height: 200px;
+  padding: 15px 0px 0px 15px;
+  overflow: auto;
+}
+.jdz-drop-files-here {
+  text-align: center;
+  padding-top: 75px;
+  font-weight: bold;
+}
+.jdz-img-preview {
+  position: relative;
+  display: inline-block;
+  height: 100px;
+  margin: 0px 15px 15px 0px;
+}
+.jdz-img-preview > img {
+  max-height: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  border: 1px solid rgb(170, 170, 170); 
+  border-radius: 5px;
+  object-fit: contain
+}
+
+.jdz-img-preview-desc {
+  padding-top: 17px;
+  text-align: center;
+  border: 1px solid rgb(170, 170, 170); 
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-height: 100px;
+  min-height: 100px;
+  min-width: 100px;
+  width: 100%;
+  background: rgb(190, 190, 190, 0.78);
+  visibility: hidden;
+  opacity: 0;
+
+  /* transition effect. not necessary */
+  transition: opacity .3s, visibility .3s;
+}
+
+.jdz-img-preview:hover .jdz-img-preview-desc {
+  visibility: visible;
+  opacity: 1;
+}
+
+/**/
+.jdz-btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #3c4b64;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: transparent;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.jdz-btn i,
+.jdz-btn .c-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  margin: 0.21875rem 0;
+  height: 0.875rem;
+  margin: 0.21875rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jdz-btn {
+    transition: none;
+  }
+}
+/**/
+.jdz-btn-dark {
+  color: #fff;
+  background-color: #636f83;
+  border-color: #636f83;
+}
+
+@media (hover: hover), (-ms-high-contrast: none) {
+  .jdz-btn-dark:hover {
+    color: #fff;
+    background-color: #535d6d;
+    border-color: #4d5666;
+  }
+}
+
+.jdz-btn-dark:focus {
+  color: #fff;
+  background-color: #535d6d;
+  border-color: #4d5666;
+  box-shadow: 0 0 0 0.2rem rgba(122, 133, 150, 0.5);
+}
+
+.jdz-btn-dark.disabled {
+  color: #fff;
+  background-color: #636f83;
+  border-color: #636f83;
+}
+/**/
+.jdz-btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.765625rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.jdz-btn-sm i,
+.jdz-btn-sm .c-icon {
+  width: 0.765625rem;
+  height: 0.765625rem;
+  margin: 0.19140625rem 0;
+}
