@@ -11,9 +11,9 @@ window.JDZ = {
       options = inputOptions;
     }
 
-    var dropFileHere = options.dropFileHere || '<p id="jdzDropFilesHere" class="jdz-drop-files-here"> Drop Files Here ... </p>';
+    var dropFileHere = options.dropFileHere || '<p class="jdz-drop-files-here"> Drop Files Here ... </p>';
     var dropContainerHtmlString = '<div id="jdzDropContainer" class="jdz-drop-container">' +
-      dropFileHere + '</div>';
+      '<span id="jdzDropFilesHere">' + dropFileHere + '<span></div>';
     var dropContainerEl = parser.parseFromString(dropContainerHtmlString, "text/html");
     dropContainer = dropContainerEl.getElementsByTagName("div")[0];
 
@@ -50,7 +50,9 @@ window.JDZ = {
       for (var i = 0; i < options.files.length; i++) {
         var file = options.files[i];
         var fileBlob = file.blob || [""];
-        var fileObj = new File(fileBlob, file.name, { type: file.mime })
+        var fileName = file.name || "";
+        var fileMime = file.mime || "image/png";
+        var fileObj = new File(fileBlob, fileName, { type: fileMime })
         functions.addFileInput(fileObj)
         var imgElDoc = functions.imgPreviewElDoc(file.path);
         document.getElementById("jdzDropContainer").appendChild(imgElDoc);
