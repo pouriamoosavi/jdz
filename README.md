@@ -25,23 +25,25 @@ This function accepts two arguments, first is the id of the element you want to 
 ```js
 JDZ.init("jdzContainer"); // jdzContainer is the id of the element which would be JDZ parent
 ```
-
+### Options:
 The second argument is an object with some extra options:
 | Key | Description | Type | Required | Default |
 |---|---|---|---|---|
 |`dropFileHere`|The label which shows on the dropzone area. Accepts html too.|string|false|`<p class="jdz-drop-files-here"> Drop Files Here ... </p>`|
-|`files`|Default files which would be fill in dropzone from the beginning.|[object] \| object|false|`[]`|
-|`paramName`|The name of the input elements which will create near the dropzone|string|false|`"files"`|
+|`files`|Default files which will fill in dropzone from the beginning.|[object]|false|`null`|
+|`paramName`|The name of the input elements which will create for each file (either drop or browse). This value does not effect default files as they have their own `paramName`. This feature helps you distinguish files in your server.|string|false|`"files"`|
 
-Each object in `files` array should have these keys to work properly:
+Each object in `files` array, can have these keys:
 | Key | Description | Type | Required | Default |
 |---|---|---|---|---|
 |`blob`|The blob of the file data. You can read about blobs <a href="https://developer.mozilla.org/en-US/docs/Web/API/Blob">here</a>|Blob|false|`[""]`
-|`name`|The file name|string|true|`""`|
-|`mime`|The file mimetype|string|true|`"image/png"`|
-|`path`|The file path (in your server for example)|string|true|`""`|
+|`name`|The file's name|string|true|`""`|
+|`mime`|The file's mimetype|string|false|`"image/png"`|
+|`path`|The file's source url (in your server for example)|string|true|`""`|
+|`paramName`|The name of the input element for this specific file.|string|false|`"oldFiles"`|
 
-Beside those `options` There are two functions which you can access from `JDZ`:
+### Functions:
+Beside those `options` there are two functions which you can access from `JDZ`:
 | Name | Description | Inputs | Output |
 |---|---|---|---|
 |`browse`|Open file browse dialog to choose file/files from system.|`null`|`null`|
@@ -59,6 +61,7 @@ JDZ.init("jdzContainer", {
       name: "radome photo.png",
       path: "https://picsum.photos/200/300",
       mime: "image/png",
+      paramName: "defaultFiles",
     },
   ],
   paramName: "photos",
@@ -108,6 +111,7 @@ Full example:
             name: "radome photo.png",
             path: "https://picsum.photos/200/300",
             mime: "image/png",
+            paramName: "defaultFiles",
           },
         ],
       });

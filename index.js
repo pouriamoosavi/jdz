@@ -7,9 +7,7 @@ var options;
 window.JDZ = {
   init: function (targetID, inputOptions) {
     var targetContainer = document.getElementById(targetID);
-    if (inputOptions && typeof inputOptions === "object") {
-      options = inputOptions;
-    }
+    functions.setOptions(inputOptions);
 
     var dropFileHere = options.dropFileHere || '<p class="jdz-drop-files-here"> Drop Files Here ... </p>';
     var dropContainerHtmlString = '<div id="jdzDropContainer" class="jdz-drop-container">' +
@@ -35,25 +33,22 @@ window.JDZ = {
 
       var files = e.dataTransfer.files;
       for (var i = 0; i < files.length; i++) {
-        functions.addFileInput(files[i]);
+        functions.addFileInput(files[i], options.paramName);
         functions.addImgPreview(files[i]);
         functions.fileUploaded();
       }
 
     };
 
-    if (options.files) {
-      if (!Array.isArray(options.files)) {
-        options.files = [options.files]
-      }
-
+    if (options.files && Array.isArray(options.files)) {
       for (var i = 0; i < options.files.length; i++) {
         var file = options.files[i];
         var fileBlob = file.blob || [""];
         var fileName = file.name || "";
         var fileMime = file.mime || "image/png";
+        var elementName = file.paramName || "oldFiles"
         var fileObj = new File(fileBlob, fileName, { type: fileMime })
-        functions.addFileInput(fileObj)
+        functions.addFileInput(fileObj, elementName)
         var imgElDoc = functions.imgPreviewElDoc(file.path);
         document.getElementById("jdzDropContainer").appendChild(imgElDoc);
         functions.fileUploaded();
@@ -69,7 +64,7 @@ window.JDZ = {
       var files = this.files;
       // create a file input for each chosen file.
       for (var i = 0; i < files.length; i++) {
-        functions.addFileInput(files[i]);
+        functions.addFileInput(files[i], options.paramName);
         functions.addImgPreview(files[i]);
         functions.fileUploaded();
       }
@@ -91,9 +86,10 @@ window.JDZ = {
 }
 
 var functions = {
-  fileInputElDoc: function () {
-    var paramName = options.paramName || "files";
-    var inputHtmlString = '<input type="file" name="' + paramName + '" multiple="multiple" id="jdzFileInput_' + id + '"/>';
+  fileInputElDoc: function (paramName) {
+    var nameAttr = paramName ? ' name="'+paramName+'" ': " ";
+    // var paramName = options.paramName || "files";
+    var inputHtmlString = '<input type="file" '+nameAttr+' multiple="multiple" id="jdzFileInput_' + id + '"/>';
     var inputEl = parser.parseFromString(inputHtmlString, "text/html");
     return inputEl.getElementsByTagName("input")[0];
   },
@@ -116,8 +112,8 @@ var functions = {
     return imgEl.getElementsByTagName("div")[0];
   },
 
-  addFileInput: function (file) {
-    var inputElDoc = functions.fileInputElDoc();
+  addFileInput: function (file, paramName) {
+    var inputElDoc = functions.fileInputElDoc(paramName);
 
     // element.files accepts an array of files only.
     var list = new DataTransfer();
@@ -145,7 +141,13 @@ var functions = {
       document.getElementById('jdzDropFilesHere').style.display = "none"
     }
   },
+
+  setOptions: function (inputOptions) {
+    if (inputOptions && typeof inputOptions === "object") {
+      options = inputOptions;
+    }
+    if(!options.dropFileHere) options.dropFileHere = '<p class="jdz-drop-files-here"> Drop Files Here ... </p>';
+    if(!options.files) options.files = null;
+    if(!options.paramName) options.paramName = "files";
+  }
 }
-
-
-
