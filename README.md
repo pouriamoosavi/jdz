@@ -75,50 +75,7 @@ Calling `browse` function:
 ```
 
 Full example:
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Awesome JDZ</title>
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/styles.css"
-    />
-    <script src="https://cdn.jsdelivr.net/gh/pouriamoosavi/jdz/index.js"></script>
-  </head>
-  <body>
-    <div style="margin-bottom: 10px;">
-      <label
-        >Drop files here to upload or click
-        <button type="button" class="jdz-btn jdz-btn-sm jdz-btn-dark" onclick="JDZ.browse()">
-          <i class="fa fa-upload"></i> upload
-        </button>
-      </label>
-    </div>
-    <div id="jdzContainer"></div>
-    <script>
-      JDZ.init("jdzContainer", {
-        files: [
-          {
-            name: "radome photo.png",
-            path: "https://picsum.photos/200/300",
-            mime: "image/png",
-            paramName: "defaultFiles",
-          },
-        ],
-      });
-    </script>
-  </body>
-</html>
-```
+<a href="./examples/simple.html">Simple Example</a>
 
 ## Dependencies
 
